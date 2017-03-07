@@ -21,7 +21,7 @@ docker run -it --rm \
 --privileged \
 --name pritunl \
 --net host \
---env MONGODB_URI=mongodb://127.0.0.1:27017/pritunl \
+--env DATABASE_URL=mongodb://127.0.0.1:27017/pritunl \
 quay.io/kato/pritunl:latest
 ```
 
@@ -50,7 +50,7 @@ ExecStart=/usr/bin/rkt run --stage1-from-dir=stage1-fly.aci \
  --net=host \
  --dns=host \
  --hosts-entry=host \
- --set-env MONGODB_URI=mongodb://127.0.0.1:27017/pritunl \
+ --set-env DATABASE_URL=mongodb://127.0.0.1:27017/pritunl \
  ${IMG}
 
 [Install]
