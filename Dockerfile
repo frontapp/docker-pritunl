@@ -37,5 +37,4 @@ ADD rootfs /
 # Expose ports and entrypoint:
 #------------------------------------------------------------------------------
 
-EXPOSE 9700
 ENTRYPOINT ["/init"]

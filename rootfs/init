@@ -1,4 +1,11 @@
 #!/bin/sh
 
+# Ports.
+pritunl set app.server_port ${PORT}
+pritunl set app.redirect_server false
+
+# Database.
 [ "${DATABASE_URL}" ] && pritunl set-mongodb ${DATABASE_URL}
+
+# Start the process.
 exec env GODEBUG=netdns=cgo pritunl start
