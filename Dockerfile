@@ -21,10 +21,10 @@ RUN apk --no-cache add --update -t deps go git bzr wget py-pip \
     && export GOPATH='/go' && go get github.com/pritunl/pritunl-dns \
     && go get github.com/pritunl/pritunl-web && cp /go/bin/* /usr/bin/ \
     && wget https://github.com/frontapp/pritunl/archive/master.tar.gz \
-    && tar zxvf master.tar.gz && cd master \
+    && tar zxvf master.tar.gz && cd pritunl-master \
     && python2 setup.py build && pip install --upgrade pip \
     && pip install -r requirements.txt && mkdir -p /var/lib/pritunl \
-    && python2 setup.py install && rm -rf *${VERSION}* && rm -rf /go \
+    && python2 setup.py install && rm -rf *master* && rm -rf /go \
     && apk del --purge deps; rm -rf /tmp/* /var/cache/apk/*
 
 #------------------------------------------------------------------------------
