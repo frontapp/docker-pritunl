@@ -4,7 +4,7 @@
 cat << EOF > /etc/pritunl.conf
 {
     "mongodb_uri": "$DATABASE_URL",
-    "port": $PORT,
+    "port": 8080,
     "bind_addr": "0.0.0.0",
     "debug": false,
     "log_path": "/var/log/pritunl.log",
