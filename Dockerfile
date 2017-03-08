@@ -20,8 +20,8 @@ RUN apk --no-cache add --update -t deps go git bzr wget py-pip \
     && apk --no-cache add py-setuptools openssl procps ca-certificates openvpn \
     && export GOPATH='/go' && go get github.com/pritunl/pritunl-dns \
     && go get github.com/pritunl/pritunl-web && cp /go/bin/* /usr/bin/ \
-    && wget https://github.com/pritunl/pritunl/archive/${VERSION}.tar.gz \
-    && tar zxvf ${VERSION}.tar.gz && cd pritunl-${VERSION} \
+    && wget https://github.com/frontapp/pritunl/archive/master.tar.gz \
+    && tar zxvf master.tar.gz && cd pritunl-${VERSION} \
     && python2 setup.py build && pip install --upgrade pip \
     && pip install -r requirements.txt && mkdir -p /var/lib/pritunl \
     && python2 setup.py install && rm -rf *${VERSION}* && rm -rf /go \
