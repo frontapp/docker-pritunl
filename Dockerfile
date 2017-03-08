@@ -24,7 +24,7 @@ RUN apk --no-cache add --update -t deps go git bzr wget py-pip \
     && tar zxvf master.tar.gz && cd pritunl-master \
     && python2 setup.py build && pip install --upgrade pip \
     && pip install -r requirements.txt && mkdir -p /var/lib/pritunl \
-    && python2 setup.py install
+    && python2 setup.py install \
     && rm -rf /pritunl-master && rm -rf /master.tar.gz && rm -rf /go \
     && apk del --purge deps; rm -rf /tmp/* /var/cache/apk/*
 
