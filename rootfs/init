@@ -8,7 +8,6 @@ pritunl set app.reverse_proxy true
 pritunl set app.server_ssl false
 pritunl set app.redirect_server false
 pritunl set app.server_port ${PORT}
-pritunl set local.public_ip ${PUBLIC_HOST}
 
 # Start the process.
 exec env GODEBUG=netdns=cgo pritunl start
