@@ -38,4 +38,5 @@ ADD rootfs /
 # Expose ports and entrypoint:
 #------------------------------------------------------------------------------
 
+EXPOSE 11904
 ENTRYPOINT ["/init"]
