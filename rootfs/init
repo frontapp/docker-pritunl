@@ -1,13 +1,17 @@
 #!/bin/sh
 
-# Ports.
-pritunl set app.reverse_proxy true
-pritunl set app.server_ssl false
-pritunl set app.redirect_server false
-pritunl set app.server_port ${PORT}
-
-# Database.
-pritunl set-mongodb ${DATABASE_URL}
+# Config.
+cat << EOF > /etc/pritunl.conf
+{
+    "mongodb_uri": "$DATABASE_URL",
+    "port": $PORT,
+    "bind_addr": "0.0.0.0",
+    "debug": false,
+    "log_path": "/var/log/pritunl.log",
+    "temp_path": "/tmp/pritunl_%r",
+    "local_address_interface": "auto"
+}
+EOF
 
 # Start the process.
 exec env GODEBUG=netdns=cgo pritunl start
