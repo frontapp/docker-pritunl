@@ -9,6 +9,10 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv 7568D9BB55FF9E5287
     && apt-get -y install iptables pritunl \
     && rm -rf /var/lib/apt/lists/*
 
+# Disable trying to edit sysctls since we manage these from Kubernetes
+RUN sed -i -r 's/\bself\.enable_ip_forwarding\(/# &/' \
+    /usr/lib/pritunl/lib/python2.7/site-packages/pritunl/server/instance.py
+
 ADD rootfs /
 
 EXPOSE 443
