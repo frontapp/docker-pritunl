@@ -1,42 +1,16 @@
-#------------------------------------------------------------------------------
-# Set the base image for subsequent instructions:
-#------------------------------------------------------------------------------
+FROM debian:jessie-slim
+MAINTAINER Joris Andrade <joris@frontapp.com>
 
-FROM alpine:3.5
-MAINTAINER Marc Villacorta Morera <marc.villacorta@gmail.com>
+RUN echo "deb http://repo.pritunl.com/stable/apt jessie main" > /etc/apt/sources.list.d/pritunl.list
 
-#------------------------------------------------------------------------------
-# Environment variables:
-#------------------------------------------------------------------------------
-
-ENV VERSION="1.27.1259.77"
-
-#------------------------------------------------------------------------------
-# Install:
-#------------------------------------------------------------------------------
-
-RUN apk --no-cache add --update -t deps go git bzr wget py-pip \
-    gcc python-dev musl-dev linux-headers libffi-dev openssl-dev \
-    && apk --no-cache add py-setuptools openssl procps ca-certificates openvpn \
-    && export GOPATH='/go' && go get github.com/pritunl/pritunl-dns \
-    && go get github.com/pritunl/pritunl-web && cp /go/bin/* /usr/bin/ \
-    && wget https://github.com/frontapp/pritunl/archive/master.tar.gz \
-    && tar zxvf master.tar.gz && cd pritunl-master \
-    && python2 setup.py build && pip install --upgrade pip \
-    && pip install -r requirements.txt && mkdir -p /var/lib/pritunl \
-    && python2 setup.py install \
-    && rm -rf /pritunl-master && rm -rf /master.tar.gz && rm -rf /go \
-    && apk del --purge deps; rm -rf /tmp/* /var/cache/apk/*
-
-#------------------------------------------------------------------------------
-# Populate root file system:
-#------------------------------------------------------------------------------
+# Pritunl Install
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv 7568D9BB55FF9E5287D586017AE645C0CF8E292A \
+    && apt-get -y update \
+    && apt-get -y install iptables pritunl \
+    && rm -rf /var/lib/apt/lists/*
 
 ADD rootfs /
 
-#------------------------------------------------------------------------------
-# Expose ports and entrypoint:
-#------------------------------------------------------------------------------
-
-EXPOSE 11904
+EXPOSE 443
+EXPOSE 10194
 ENTRYPOINT ["/init"]

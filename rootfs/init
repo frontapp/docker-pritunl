@@ -7,13 +7,13 @@ if [ ! -c /dev/net/tun ]; then
 fi
 
 # Database.
-pritunl set-mongodb ${DATABASE_URL}
+pritunl set-mongodb ${DATABASE_URI}
 
 # Network.
 pritunl set app.reverse_proxy true
 pritunl set app.server_ssl false
 pritunl set app.redirect_server false
-pritunl set app.server_port ${PORT}
+pritunl set app.server_port ${UI_PORT}
 
 # Start the process.
-exec env GODEBUG=netdns=cgo pritunl start
+pritunl start
