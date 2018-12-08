@@ -15,5 +15,9 @@ pritunl set app.server_ssl false
 pritunl set app.redirect_server false
 pritunl set app.server_port ${UI_PORT}
 
+pritunl set host.sync_address ${SYNC_DNS}
+pritunl set host.public_address ${VPN_DNS}
+pritunl set host.name ${VPN_DNS}
+
 # Start the process.
 pritunl start
